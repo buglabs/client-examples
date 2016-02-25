@@ -1,0 +1,83 @@
+
+led <- hardware.pin9
+temp <- hardware.pin8
+tempPower <- hardware.pin7
+
+led.configure(DIGITAL_OUT)
+tempPower.configure(DIGITAL_OUT)
+temp.configure(ANALOG_IN)
+ 
+state <- 0.0
+tempF <- 0.0
+needToSettle <- 1
+
+retryFrequency <- 5.0
+sleepDuration <- 1.0
+
+function deepSleep() {
+    server.log("----")
+    server.log("ENTER DEEP SLEEP")
+    server.sleepfor(sleepDuration)
+}
+
+function getTemp() {
+    server.log("----")
+    server.log("ENTER WAKEUP")
+
+    led.write(1)
+    tempPower.write(1)
+    if (sleepDuration > 1.0 || needToSettle == 1) {
+        imp.sleep(5) //give the sensor time to settle
+        needToSettle = 0
+    } else {
+        imp.sleep(1) //assume we've already settled
+    }
+    
+    local sensorReading = temp.read()
+    
+    if (tempF == 0.0 || math.abs(tempF - sensorReading) > 5.0) {
+        tempF = (sensorReading * 0.4882) / 100
+    } else {
+        tempF = (tempF + (sensorReading * 0.4882 ) / 100) / 2
+    }
+
+    if (tempF < 0.0 || tempF > 200.00) {
+        tempF = 0.0
+    }
+
+    local rssi = imp.rssi()
+    local freeMemoryBytes = imp.getmemoryfree()
+
+    local dweetDataTable = 
+        "temperatureF=" + tempF + "&" + 
+        "sensorReading=" + sensorReading + "&" + 
+        "rssi=" + rssi + "&" + 
+        "freeMemoryBytes=" + freeMemoryBytes
+
+    local dweetFeedData = {
+        "macAddress": imp.getmacaddress(),
+        "uri": dweetDataTable,
+	"dweet_io_storage_key": "[ENTER-YOUR-DWEET-IO-STORAGE-KEY-HERE]"  //note this is only necessary for dweet.io private keys
+    }
+
+    if (rssi != 0) {
+        agent.send("sendtodweetpro", dweetFeedData)
+        agent.send("sendtodweet", dweetFeedData)
+        agent.send("sendtothingspace", dweetFeedData)
+        agent.send("sendtodweetstorage", dweetFeedData)
+
+        led.write(0)
+        tempPower.write(0)
+        if (sleepDuration > 1.0) {
+            imp.onidle(deepSleep)
+        } else {
+            imp.wakeup(3, getTemp)        
+        }
+    } else {
+        server.log("----")
+        server.log("ENTER RETRY SLEEP")
+        imp.wakeup(retryFrequency, getTemp)        
+    }
+}
+
+getTemp()

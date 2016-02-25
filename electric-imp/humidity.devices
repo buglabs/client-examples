@@ -1,0 +1,63 @@
+led <- hardware.pin9
+moistureAnalogIn <- hardware.pin8
+moistureDigitalIn <- hardware.pin7
+moisturePowerUp <- hardware.pin5
+
+led.configure(DIGITAL_OUT)
+moistureAnalogIn.configure(ANALOG_IN)
+moistureDigitalIn.configure(DIGITAL_IN)
+moisturePowerUp.configure(DIGITAL_OUT) 
+ 
+retryFrequency <- 5
+deepSleepFrequency <- 1
+
+function deepSleep() {
+    server.log("----")
+    server.log("ENTER DEEP SLEEP")
+    server.sleepfor(deepSleepFrequency) //seconds
+}
+
+function getMoisture() {
+    server.log("----")
+    server.log("ENTER WAKEUP")
+    
+    led.write(1)
+    moisturePowerUp.write(1)
+    
+    imp.sleep(3) //give the sensor time to settle
+    
+    local analogReading = moistureAnalogIn.read()
+    local digitalReading = moistureDigitalIn.read()
+    local rssi = imp.rssi()
+    local freeMemoryBytes = imp.getmemoryfree()
+    
+    local dweetDataTable = 
+        "moistureAnalogIn=" + analogReading + "&" + 
+        "moistureDigitalIn=" + digitalReading + "&" + 
+        "rssi=" + rssi + "&" + 
+        "freeMemoryBytes=" + freeMemoryBytes
+
+    local dweetFeedData = {
+        "macAddress": imp.getmacaddress(),
+        "uri": dweetDataTable,
+        "dweet_io_storage_key": "[ENTER-YOUR-DWEET-IO-STORAGE-KEY-HERE]"  //note this is only necessary for dweet.io private keys
+    }
+    
+    if (rssi != 0 && rssi > -80) {
+        agent.send("sendtodweetpro", dweetFeedData)
+        agent.send("sendtodweet", dweetFeedData)
+        agent.send("sendtothingspace", dweetFeedData)
+        agent.send("sendtodweetstorage", dweetFeedData)
+        
+        led.write(0)    
+        moisturePowerUp.write(0)
+
+        imp.onidle(deepSleep)
+    } else {
+        server.log("----")
+        server.log("ENTER RETRY SLEEP")
+        imp.wakeup(retryFrequency, getMoisture)        
+    }
+}
+
+getMoisture()

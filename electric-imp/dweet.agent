@@ -1,0 +1,55 @@
+device.on("sendtodweetpro", function(feedData) {
+    local accountID = "[ENTER-YOUR-DWEET-PRO-ACCOUNT-ID-HERE]
+
+    server.log("----")
+    server.log("SEND TO DWEET PRO")
+
+    // get private key from dweet    
+    local getLockKeyURL = "http://beta.dweet.io/get/key/for/" + accountID + "/" + feedData.macAddress
+    server.log("send getLockKeyURL=<" + getLockKeyURL + ">")
+    local lockResponse = http.get(getLockKeyURL, { "Content-Type" : "text/plain" }).sendsync()
+    server.log("recv lockResponse=<" + lockResponse.body + ">")
+    local body = http.jsondecode(lockResponse.body)
+    local key = body.with.key
+    local thing = body.with.thing
+    
+    // use that key to post some data
+    local getDweetURL = "http://beta.dweet.io/dweet/for/" + thing + "?key=" + key + "&" + feedData.uri
+    server.log("send getDweetURL=<" + getDweetURL + ">")
+    local dweetResponse = http.get(getDweetURL, { "Content-Type" : "text/plain" }).sendsync()
+    server.log("recv dweetResponse=<" + dweetResponse.body + ">")
+})
+
+
+device.on("sendtodweet", function(feedData) {
+    server.log("----")
+    server.log("SEND TO DWEET")
+
+    // use that key to post some data
+    local getDweetURL = "https://dweet.io/dweet/for/" + feedData.macAddress + "?" + feedData.uri
+    server.log("send getDweetURL=<" + getDweetURL + ">")
+    local dweetResponse = http.get(getDweetURL, { "Content-Type" : "text/plain" }).sendsync()
+    server.log("recv dweetResponse=<" + dweetResponse.body + ">")
+})
+
+device.on("sendtodweetstorage", function(feedData) {
+    server.log("----")
+    server.log("SEND TO DWEET STORAGE")
+
+    // use that key to post some data
+    local getDweetURL = "https://dweet.io/dweet/for/" + feedData.macAddress + "?key=" + feedData.dweet_io_storage_key + "&" + feedData.uri
+    server.log("send getDweetURL=<" + getDweetURL + ">")
+    local dweetResponse = http.get(getDweetURL, { "Content-Type" : "text/plain" }).sendsync()
+    server.log("recv dweetResponse=<" + dweetResponse.body + ">")
+})
+
+device.on("sendtothingspace", function(feedData) {
+    server.log("----")
+    server.log("SEND TO THINGSPACE")
+
+    // use that key to post some data
+    local getDweetURL = "https://thingspace.io/dweet/for/" + feedData.macAddress + "?" + feedData.uri
+    server.log("send getDweetURL=<" + getDweetURL + ">")
+    local dweetResponse = http.get(getDweetURL, { "Content-Type" : "text/plain" }).sendsync()
+    server.log("recv dweetResponse=<" + dweetResponse.body + ">")
+})
