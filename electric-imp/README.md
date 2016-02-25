@@ -53,8 +53,6 @@ VCC - Pin9
 
 http://www.tinyosshop.com/index.php?route=product/product&product_id=458
 
-https://twitter.com/andrewwolverton/status/548002036361728000
-
 VCC - Pin5
 
 GND - GND
