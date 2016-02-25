@@ -4,6 +4,10 @@ Example Dweet.io client applications for various hardware platforms.  These are 
 # Some interesting community driven Dweet clients
 If you're interested in being part of this list, please contact kyle@buglabs.net.  All rights reserved.  No promises made by BugLabs.  But you won't be dissapointed :D
 
+ifttt / dweet / freeboard
+-------------------------
+https://github.com/cshotton/dweet-ifttt
+
 TI Launchpad
 ------------
 https://www.openhomeautomation.net/home-automation-cc3200/
