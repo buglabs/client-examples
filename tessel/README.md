@@ -56,7 +56,7 @@ tessel logs
 ## EXAMPLES
 
 An example dashboard can be found here:
-https://alpha.freeboard.io/board/-9Iu5P
+https://alpha.freeboard.io/board/kVQK57
 
 ## DISCLAIMERS
 
