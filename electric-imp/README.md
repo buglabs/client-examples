@@ -64,8 +64,5 @@ DO - Pin7
 A0 - Pin8
 
 #freeboard.io
-
-Temperature - https://alpha.freeboard.io/board/Bvj8zL
-
-Moisture - https://alpha.freeboard.io/board/u5q8zL
+https://freeboard.io/board/j6vF57
 
