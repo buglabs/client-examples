@@ -84,12 +84,3 @@ ThingSpace Home: https://thingspace.verizon.com/developer/
 ThingSpace documentation: https://thingspace.verizon.com/developer/apis#/Dweet/index.html
 
 Building Plugins: See http://freeboard.github.io/freeboard/docs/plugin_example.html for info on how to build plugins for freeboard.
-
-Testing Plugins: Just edit index.html and add a link to your javascript file near the end of the head.js script loader, like:
-
-...
-"path/to/my/plugin/file.js",
-$(function()
-{ //DOM Ready
-    freeboard.initialize(true);
-});
