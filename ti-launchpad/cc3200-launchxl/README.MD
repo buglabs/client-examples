@@ -57,11 +57,21 @@ Open the Serial Monitor in Energia to ensure connectivity and data is successful
 Demo Dashboard Usage
 --------------------
 
+[!dashboard_screen_shot](./doc_images/dashboard-1-default.png)
+[!dashboard_set_thingname](./doc_images/dashboard-2-set_thingname.png)
+[!dashboard_connected](./doc_images/dashboard-3-connected.png)
+[!dashboard_toggle_led](./doc_images/dashboard-4-toggle_led.png)
+[!dashboard_led_on](./doc_images/dashboard-5-led_on.png)
+[!dashboard_live](./doc_images/dashboard-6-button_on.png)
 
-##Customizing Demo Dashboard using ThingSpace Freeboard
+
+Customizing the Dashboard 
+--------------------------
 Sign-in to ThingSpace Develop: https://thingspace.verizon.com/developer/
 Navigate to the Build page: https://thingspace.verizon.com/developer/build#/ 
 Click Launch
 Visit Dashboard: https://freeboard.thingspace.io/board/CwbCJf
 Click Clone
 
+Additional Resources
+--------------------
