@@ -137,18 +137,23 @@ if (true == read_received_data()) {
   {
     /* no data. Do nothing */
   }
-
-  /* if REQUEST_INTERVAL milliseconds have passed since your last connection,
-     then connect again and send data */
-  if (millis() - lastReceivedTime > REQUEST_INTERVAL) {
-    /* send a get request */
-    get_request();
-  }
-  else if (millis() - lastSentTime > REQUEST_INTERVAL) {
-    send_dweet();
+  if (thing_name != "")
+  {
+    /* if REQUEST_INTERVAL milliseconds have passed since your last connection,
+       then connect again and send data */
+    if (millis() - lastReceivedTime > REQUEST_INTERVAL) {
+      /* send a get request */
+      get_request();
+    }
+    else if (millis() - lastSentTime > REQUEST_INTERVAL) {
+      send_dweet();
+    }
+    else {
+      /* do nothing and wait */
+    }
   }
   else {
-    /* do nothing and wait */
+    /* thing_name not set - wait for server response */
   }  
 }
 
@@ -164,6 +169,14 @@ void connection_request() {
   if (client.connect(TARGET_SERVER, HTTP_PORT)) {
     /* connection request succeed */
     Serial.println("connected!");
+    
+    /* if thing_name not provided in Settings.h, we can obtain a temporary thing-name from thingspace.io.
+    /* NOTE: Temporary thing-names retrieved from server will NOT persist between power-cyles.
+    */
+    if (thing_name == "")
+    {
+       requestThingName(); 
+    }
   }
   else {
     /* connection request failed */
@@ -222,6 +235,14 @@ void get_request() {
 
   /* note the time that the connection was made */
   lastReceivedTime = millis();
+}
+
+void requestThingName() {
+  client.print("GET /dweet");
+  client.println(" HTTP/1.1");
+  client.println("Host: thingspace.io");
+  client.println("Connection: Keep-Alive");
+  client.println();
 }
 
 
@@ -301,7 +322,17 @@ void check_received_data()
             
           }
           else {
-            /* the "thing" field is not as expected. Do nothing */
+            if ( thing_name == "")
+            {
+            /* the "thing" field contains the server-provided thing_name. */
+              string_index += 6;
+              int end_index = received_data_string.indexOf(";");
+              String tmp = received_data_string.substring(string_index,end_index);
+              Serial.print("INFO: setting thing-name to: ");
+              Serial.println(tmp);
+              thing_name = tmp;
+              thing_name_receive = thing_name + "-send";
+            }
           }
         }
         else {
