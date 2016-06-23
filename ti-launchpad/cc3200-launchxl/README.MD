@@ -29,7 +29,7 @@ Download Energia: http://energia.nu/download/
 
 Follow the getting-started video to ensure the board's jumpers are properly set: https://youtu.be/Kn-YPsByyYU
 
-Download and extract the latest client code: [/releases/latest](/releases/latest)
+Download and extract the latest client code: [https://github.com/buglabs/client-examples/releases/latest](https://github.com/buglabs/client-examples/releases/latest)
 
 Open Energia, click File->Open, and choose the cc3200LP_thingspace.ino file.
 
@@ -49,8 +49,8 @@ HINT: To program the board, you must have a jumper on J15.
 If the programming process succeeds, remove jumper on J15 and reboot the board (push the RESET button on the board, or power-cycle).
 
 Open the Serial Monitor in Energia to ensure connectivity and data is successfully sent and received
-[!energia_serial_monitor1](./doc_images/energia-4-serial_monitor1.png)
-[!energia_serial_monitor2](./doc_images/energia-5-serial_monitor2.png)
+![energia_serial_monitor1](./doc_images/energia-4-serial_monitor1.png)
+![energia_serial_monitor2](./doc_images/energia-5-serial_monitor2.png)
 
 *For more information on the LaunchPad CC3200-LAUNCHXL, visit [http://energia.nu/pin-maps/guide_cc3200launchpad/](http://energia.nu/pin-maps/guide_cc3200launchpad/)
 
