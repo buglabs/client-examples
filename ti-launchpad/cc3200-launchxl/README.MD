@@ -69,9 +69,27 @@ Customizing the Dashboard
 --------------------------
 Sign-in to ThingSpace Develop: https://thingspace.verizon.com/developer/
 Navigate to the Build page: https://thingspace.verizon.com/developer/build#/ 
-Click Launch
+Click Launch.
 Visit Dashboard: https://freeboard.thingspace.io/board/CwbCJf
-Click Clone
+Click Clone.
 
 Additional Resources
 --------------------
+Demonstration Dashboard: https://freeboard.thingspace.io/board/CwbCJf (you must login first before navigating here)
+
+TI LaunchPad documentation: http://www.ti.com/ww/en/launchpad/launchpads-connected-cc3200-launchxl.html#tabs
+
+ThingSpace Home: https://thingspace.verizon.com/developer/
+
+ThingSpace documentation: https://thingspace.verizon.com/developer/apis#/Dweet/index.html
+
+Building Plugins: See http://freeboard.github.io/freeboard/docs/plugin_example.html for info on how to build plugins for freeboard.
+
+Testing Plugins: Just edit index.html and add a link to your javascript file near the end of the head.js script loader, like:
+
+...
+"path/to/my/plugin/file.js",
+$(function()
+{ //DOM Ready
+    freeboard.initialize(true);
+});
