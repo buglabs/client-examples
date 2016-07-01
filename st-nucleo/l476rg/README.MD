@@ -29,7 +29,7 @@ Programming the Board
 Download Tera Term: https://ttssh2.osdn.jp/index.html.en
 
 On the WiFi board, remove resistor R21 (RED) and apply a solder bridge to R20 (YELLOW)
-![wifiboard](./doc_images/wifiboard.png)
+![wifiboard](./doc_images/wifisetup.png)
 
 Affix the boards in the following order:  L476RG (Bottom) - IDW01M1 (Middle) - IKS01A1 (Top)
 ![boardsetup](./doc_images/boardsetup.png)
