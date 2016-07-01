@@ -93,3 +93,13 @@ Click Clone
 
 Additional Resources
 --------------------
+
+Demonstration Dashboard: https://freeboard.thingspace.io/board/5PzeDm (you must login first before navigating here)
+
+ST Nucleo documentation: http://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-l476rg.html
+
+ThingSpace Home: https://thingspace.verizon.com/developer/
+
+ThingSpace documentation: https://thingspace.verizon.com/developer/apis#/Dweet/index.html
+
+Building Plugins: See http://freeboard.github.io/freeboard/docs/plugin_example.html for info on how to build plugins for freeboard.
