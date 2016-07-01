@@ -70,12 +70,12 @@ If successful, you will now see the data being sent to Thingspace.io live in the
 Demo Dashboard Usage
 --------------------
 
-[!dashboard_screen_shot](./doc_images/dash1.png)
-[!dashboard_set_thingname](./doc_images/dash2.png)
-[!dashboard_connected](./doc_images/dash3.png)
-[!dashboard_toggle_led](./doc_images/dash4.png)
-[!dashboard_led_on](./doc_images/dash-full.png)
-[!dashboard_live](./doc_images/dash5.png)
+![dashboard_screen_shot](./doc_images/dash1.png)
+![dashboard_set_thingname](./doc_images/dash2.png)
+![dashboard_connected](./doc_images/dash3.png)
+![dashboard_toggle_led](./doc_images/dash4.png)
+![dashboard_led_on](./doc_images/dash-full.png)
+![dashboard_live](./doc_images/dash5.png)
 
 
 Customizing the Dashboard 
