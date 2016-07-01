@@ -81,10 +81,15 @@ Demo Dashboard Usage
 Customizing the Dashboard 
 --------------------------
 Sign-in to ThingSpace Develop: https://thingspace.verizon.com/developer/
+
 Navigate to the Build page: https://thingspace.verizon.com/developer/build#/ 
+
 Click Launch
+
 Visit Dashboard: https://freeboard.thingspace.io/board/5PzeDm
+
 Click Clone
+
 
 Additional Resources
 --------------------
